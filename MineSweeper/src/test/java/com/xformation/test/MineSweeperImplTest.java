@@ -15,32 +15,39 @@ public class MineSweeperImplTest {
 	
 	@Test
 	public void whenMethodValidateLegalCharactersIsGivenCorrectStringItShouldNotThrowException() {
-		String mineFieldString = "abc";
+		String mineFieldString = "..*.\n..............***********\n\n\n";
 		mineSweeperImpl.validateLegalCharacters(mineFieldString);
 	}
 	
 	@Test
 	public void whenMethodValidateIfStringFormsRectangularIsGivenCorrectStringItShouldNotThrowException() {
-		String mineFieldString = "abc";
+		String mineFieldString = "*...\n..*.\n....";
 		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
+	public void whenMethodValidateMineFieldStringIsGivenNullItShouldThrowException() {
+		String mineFieldString = null;
+		mineSweeperImpl.validateMineFieldString(mineFieldString);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
 	public void whenMethodValidateMineFieldStringIsGivenIllegalStringItShouldThrowException() {
-		String mineFieldString = "abc";;
+		String mineFieldString = "*...\n..*.\n.....";
 		mineSweeperImpl.validateMineFieldString(mineFieldString);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void whenMethodValidateLegalCharactersIsGivenIllegalStringItShouldThrowException() {
-		String mineFieldString = "abc";
+		String mineFieldString = "*...\n..*.\n....a90";
 		mineSweeperImpl.validateLegalCharacters(mineFieldString);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void whenMethodValidateIfStringFormsRectangularIsGivenIllegalStringItShouldThrowException() {
-		String mineFieldString = "bc";
-		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);
-	}
+		String mineFieldString = "*...\n..*.\n..*..\n....";
+		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);		
+	}	
+	
 
 }
