@@ -1,21 +1,31 @@
 package com.xformation.test;
 
 
-public class MineSweeperImpl implements MineSweeper {
+public final class MineSweeperImpl implements MineSweeper {
 	
-	private char[] mineField;
+	private char[][] mineField;
 	private char[][] hintField;	
 	
 
 	public void setMineField(String mineFieldString) throws IllegalArgumentException {
-		
+		validateMineFieldString(mineFieldString);
+		String[] mineFieldAsArray = mineFieldString.split("\n");
+	    this.mineField = new char[mineFieldAsArray.length][mineFieldAsArray[0].length()];
+	    for (int i = 0; i < mineFieldAsArray.length; i++) {
+	        mineField[i] = mineFieldAsArray[i].toCharArray();
+	    }
 
 	}
 
 	public String getHintField() throws IllegalStateException {
-		
+		if (mineField == null)
+			throw new IllegalStateException();
 		
 		return null;
+	}
+	
+	char[][] getMineField() {
+		return mineField;
 	}
 	
 	void validateMineFieldString(String mineFieldString) {

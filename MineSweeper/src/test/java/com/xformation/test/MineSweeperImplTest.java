@@ -1,4 +1,6 @@
 package com.xformation.test;
+
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 
@@ -6,6 +8,20 @@ import org.junit.Test;
 public class MineSweeperImplTest {
 	
 	MineSweeperImpl mineSweeperImpl = new MineSweeperImpl();
+	
+	@Test
+	public void whenMethodSetMineFieldIsCalledItShouldCreateMineField() {
+		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
+	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
+	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void whenMethodSetMineFieldIsCalledWithInvalidInputItShouldThrowException() {
+		mineSweeperImpl.setMineField("*...\n..*..\n....");	    
+	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
+	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
+	}
 	
 	@Test
 	public void whenMethodValidateMineFieldStringIsGivenCorrectStringItShouldNotThrowException() {
@@ -27,14 +43,15 @@ public class MineSweeperImplTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void whenMethodValidateMineFieldStringIsGivenNullItShouldThrowException() {
-		String mineFieldString = null;
+		String mineFieldString = null;		
 		mineSweeperImpl.validateMineFieldString(mineFieldString);
+		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void whenMethodValidateMineFieldStringIsGivenIllegalStringItShouldThrowException() {
-		String mineFieldString = "*...\n..*.\n.....";
-		mineSweeperImpl.validateMineFieldString(mineFieldString);
+		String mineFieldString = "*...\n..*.\n.....";		
+		mineSweeperImpl.validateMineFieldString(mineFieldString);		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -47,7 +64,5 @@ public class MineSweeperImplTest {
 	public void whenMethodValidateIfStringFormsRectangularIsGivenIllegalStringItShouldThrowException() {
 		String mineFieldString = "*...\n..*.\n..*..\n....";
 		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);		
-	}	
-	
-
+	}
 }
