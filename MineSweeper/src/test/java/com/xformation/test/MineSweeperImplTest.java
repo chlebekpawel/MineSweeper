@@ -10,58 +10,67 @@ public class MineSweeperImplTest {
 	MineSweeperImpl mineSweeperImpl = new MineSweeperImpl();
 	
 	@Test
-	public void whenMethodSetMineFieldIsCalledItShouldCreateMineField() {
+	public void whenMethodSetMineFieldIsCalledThenItShouldCreateMineField() {
 		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
 	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
 	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
+	    
+	    
+	}
+	
+	@Test
+	public void whenMethodGetHintFieldIsCalledThenItShouldReturnStringRepresentationOfHintField() {
+		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
+	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
+	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
+	    
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void whenMethodSetMineFieldIsCalledWithInvalidInputItShouldThrowException() {
+	public void whenMethodSetMineFieldIsCalledWithInvalidInputThenItShouldThrowException() {
 		mineSweeperImpl.setMineField("*...\n..*..\n....");	    
 	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
 	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
 	}
 	
 	@Test
-	public void whenMethodValidateMineFieldStringIsGivenCorrectStringItShouldNotThrowException() {
+	public void whenMethodValidateMineFieldStringIsGivenCorrectStringThenItShouldNotThrowException() {
 		String mineFieldString =  "*...\n..*.\n....";
 		mineSweeperImpl.validateMineFieldString(mineFieldString);
 	}
 	
 	@Test
-	public void whenMethodValidateLegalCharactersIsGivenCorrectStringItShouldNotThrowException() {
+	public void whenMethodValidateLegalCharactersIsGivenCorrectStringThenItShouldNotThrowException() {
 		String mineFieldString = "..*.\n..............***********\n\n\n";
 		mineSweeperImpl.validateLegalCharacters(mineFieldString);
 	}
 	
 	@Test
-	public void whenMethodValidateIfStringFormsRectangularIsGivenCorrectStringItShouldNotThrowException() {
+	public void whenMethodValidateIfStringFormsRectangularIsGivenCorrectStringThenItShouldNotThrowException() {
 		String mineFieldString = "*...\n..*.\n....";
 		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void whenMethodValidateMineFieldStringIsGivenNullItShouldThrowException() {
+	public void whenMethodValidateMineFieldStringIsGivenNullThenItShouldThrowException() {
 		String mineFieldString = null;		
-		mineSweeperImpl.validateMineFieldString(mineFieldString);
-		
+		mineSweeperImpl.validateMineFieldString(mineFieldString);		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void whenMethodValidateMineFieldStringIsGivenIllegalStringItShouldThrowException() {
+	public void whenMethodValidateMineFieldStringIsGivenIllegalStringThenItShouldThrowException() {
 		String mineFieldString = "*...\n..*.\n.....";		
 		mineSweeperImpl.validateMineFieldString(mineFieldString);		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void whenMethodValidateLegalCharactersIsGivenIllegalStringItShouldThrowException() {
+	public void whenMethodValidateLegalCharactersIsGivenIllegalStringThenItShouldThrowException() {
 		String mineFieldString = "*...\n..*.\n....a90";
 		mineSweeperImpl.validateLegalCharacters(mineFieldString);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void whenMethodValidateIfStringFormsRectangularIsGivenIllegalStringItShouldThrowException() {
+	public void whenMethodValidateIfStringFormsRectangularIsGivenIllegalStringThenItShouldThrowException() {
 		String mineFieldString = "*...\n..*.\n..*..\n....";
 		mineSweeperImpl.validateIfStringFormsRectangular(mineFieldString);		
 	}
