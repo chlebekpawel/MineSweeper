@@ -4,10 +4,10 @@ package com.xformation.test;
 public final class MineSweeperImpl implements MineSweeper {
 	
 	private char[][] mineField;
-	private char[][] hintField;
-	private String stringRepresentationOfHintField;
-
-	public void setMineField(String mineFieldString) throws IllegalArgumentException {
+	private char[][] hintField;	
+	
+	@Override
+	public final void setMineField(String mineFieldString) throws IllegalArgumentException {
 		validateMineFieldString(mineFieldString);
 		String[] mineFieldAsArray = mineFieldString.split("\n");
 	    this.mineField = new char[mineFieldAsArray.length][mineFieldAsArray[0].length()];
@@ -16,19 +16,23 @@ public final class MineSweeperImpl implements MineSweeper {
 	    }
 	    setHintField();
 	}
-
-	public String getHintField() throws IllegalStateException {
+	
+	@Override
+	public final String getHintField() throws IllegalStateException {
 		if (hintField == null) {
 			throw new IllegalStateException();
 		} else {
-			return stringRepresentationOfHintField;
+			StringBuilder stringBuilder = new StringBuilder();
+		    for (int i = 0; i < hintField.length; i++) {
+		        stringBuilder.append(hintField[i]).append("\n");
+		    }
+		    return stringBuilder.substring(0, stringBuilder.length() - 1);
 		}					
 	}
 	
 	void setHintField() {
 		initializeHintFieldWithMinesAndZerosInPlaceOfDots();
-		createCountersForAdjacentMinesInHintField();
-		createStringRepresentationOfHintField();
+		createCountersForAdjacentMinesInHintField();		
 	}
 
 	void initializeHintFieldWithMinesAndZerosInPlaceOfDots() {
@@ -70,7 +74,7 @@ public final class MineSweeperImpl implements MineSweeper {
 	}	
 	
 	boolean isPositionInsideHintFieldBoundaries(int row, int column) {
-		if (row > 0 && row <  hintField.length && column > 0 && column < hintField[0].length) {
+		if (row >= 0 && row < hintField.length && column >= 0 && column < hintField[0].length) {
 			return true;
 		} else {
 			return false;
@@ -87,12 +91,7 @@ public final class MineSweeperImpl implements MineSweeper {
 	
 	char[][] getMineField() {
 		return mineField;
-	}
-	
-	private void createStringRepresentationOfHintField() {
-		// TODO Auto-generated method stub
-		
-	}
+	}	
 	
 	void validateMineFieldString(String mineFieldString) {
 		if (mineFieldString == null)

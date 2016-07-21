@@ -7,23 +7,19 @@ import org.junit.Test;
 
 public class MineSweeperImplTest {
 	
-	MineSweeperImpl mineSweeperImpl = new MineSweeperImpl();
+	MineSweeperImpl mineSweeperImpl = new MineSweeperImpl();	
+	
+	@Test
+	public void whenMethodGetHintFieldIsCalledThenItShouldReturnStringRepresentationOfHintField() {
+		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
+		assertEquals("*211\n12*1\n0111", mineSweeperImpl.getHintField());   
+	}
 	
 	@Test
 	public void whenMethodSetMineFieldIsCalledThenItShouldCreateMineField() {
 		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
 	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
-	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
-	    
-	    
-	}
-	
-	@Test
-	public void whenMethodGetHintFieldIsCalledThenItShouldReturnStringRepresentationOfHintField() {
-		mineSweeperImpl.setMineField("*...\n..*.\n....");	    
-	    char[][] expectedArray = {{'*','.', '.','.'}, {'.','.','*','.'}, {'.','.','.','.'}};
-	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField());
-	    
+	    assertArrayEquals(expectedArray, mineSweeperImpl.getMineField()); 	    
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
